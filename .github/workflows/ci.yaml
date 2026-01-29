@@ -20,7 +20,8 @@ jobs:
      key: ${{ secrets.EC2_SSH_KEY }}
      scripts: |
       cd ~/project2-cloud-ci-cd
-      git pull 
+      git fetch --all
+      git reset --hard origin/main
       docker rm -f project2 || true
       docker build -t project2-app .
       docker run -d -p  8000:8000 --name project2 project2-app
