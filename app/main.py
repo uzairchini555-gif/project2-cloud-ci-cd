@@ -4,7 +4,7 @@ app = FastAPI()
 def root():
 	return {
 	    "Project1": "Project2",
-            "message": "CI/CD pipeline: This is a test",
+            "message": "CI/CD pipeline: again testing"
  	    "Status": "Running"
 	       }
 @app.get("/health")
