@@ -2,7 +2,7 @@ from fastapi import FastAPI
 app = FastAPI()
 @app.get("/")
 def root():
-	return {"message": "Project2 CI/CD testing CD"}
+	return {"message": "Project2 CI/CD one more test"}
 @app.get("/health")
 def health():
 	return {"Status": "Healthy"}
