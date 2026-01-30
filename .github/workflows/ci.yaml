@@ -23,5 +23,5 @@ jobs:
       git fetch --all
       git reset --hard origin/main
       docker rm -f project2 || true
-      docker build -t project2-app .
+      docker build --no-cache -t project2-app .
       docker run -d -p  8000:8000 --name project2 project2-app
