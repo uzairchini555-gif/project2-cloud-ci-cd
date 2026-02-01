@@ -1,11 +1,21 @@
-## Project 2 - CI/CD Auto Deploy Python App
+## Project 2 - Cloud CI/CD Pipeline with Docker & AWS EC2
 
 ## Overview
-This is a python FastAPI backend application deployed on AWS EC2 with a fully automated CI/CD pipeline using Github Actions and Docker. Every code push automatically rebuilds the Docker container on EC2 and updates the app without manual intervention.
+This project demonstrates a real-world CI/CD pipeline where a containerized python web application is automatically build and deployed to an AWS EC2 instance using Github Actions
 
-## Problem 
-In a real-world cloud/DevOps workflow, manaully deploying apps after each code change is error-prone and time-consuming. Project 2 solves this by automating deployment so that updates are immediately reflected in the running app.
+Any code change pushed to Github triggers an automated workflow that rebuilds the Docker iamge and redeploys the application - no manual SSH or restart required.
 
+## Problem Statement
+Manually deploying applications on server is:
+- Error-prone
+- Time-consuming 
+- Not scalable
+
+## Goal of the project
+- implement CI/CD automation using Github Actions
+- Eliminate manual deployment step
+- Ensure the app behaves the same across environment using Docker 
+- Deploy updates to AWS EC2 automatically on every push 
 
 ## Tech Stack
 - Python 3.11 (FastAPI) - Backend API
@@ -14,46 +24,75 @@ In a real-world cloud/DevOps workflow, manaully deploying apps after each code c
 - Github Actions - CI/CD Pipeline
 - Linux (ubuntu) - Server OS
 
-## Key Features
-- Automatic deployment after each git push
-- Dockerized app ensures consistent environemnt locally and on EC2
-- Eliminates manual SSH and container rebuilds 
-- Handles container reatart automatically
+## How the CI/CD pipeline works
+1. Developer pushes code to the main branch
+2. Githu Actions workflow is triggered 
+3. Workflow:
+  - Checks out the latest code 
+  - Build a docker image 
+  - Connects securely to EC2 via SSH
+  - stops the old container 
+  - Runs the updated container 
+4. Application is updated automatically 
+✅ Zero manual intervention
+✅ Repeatable and reliable deployments
 
-## Challenges Faced 
-- Docker build errors and conntainer crashes
-- Python syntax errors during app update 
-- Misconfiguration of Github Actions SSH step (script typo!)
-- Ensuring the app listens on 0.0.0.0 for external access
+## Project Structure 
+Project-cloud-ci-cd
+      | 
+app/
+    main.py
+      |
+images/ 
+       browser-output.png
+      |
+Dockerfile
+      |
+requirements.txt
+      |
+README.md
+      |
+.github/
+        workflows/
+                  ci.yaml
 
-## Architecture / Workflow
+## How to Run Locally
+```Bash
+git clone 
+https://github.com/<Your-user>/project2-cloud-cd-cd.git
+cd project-cloud-ci-cd
 
-Laptop (code push)
-       |
-Github Actions (CI/CD)
-       |
-SSH to EC2 -> git pull, docker build and run
-       |
-Docker container runs FastAPI app
-       |
-Browser access -> http://<EC2_PUBLIC_IP>:8000
-
-## How to run locally
-```bash
-git clone https://github.com/<your-username>/project2-cloud-ci-cd
-cd project2-cloud-ci-cd
 docker build -t project2-app .
 docker run -d -p 8000:8000 --name project2 project2-app
-curl http://localhost:8000
 
-## Result / Demo
-"Every push to main triggers a Github Actions workflow that:
-- Builds a Docker Image
-- Connects to EC2 via SSH 
-- pulls latest code
-- Rebuilds and Restarts the container"
+curl http:/localhost:8000
+```
+## Live Demo 
+http://<EC2_PUBLIC_IP>:8000
 
-## Demo Screenshot
+## Demo Screenshot 
+![App is running in bowser](images/browser-output.png)
 
-![App running in browser](images/browser-output.png)
+## Challenges Faced $ Solutions
+- Docker build errors -> Resolved by analyzing logs and fixing image structure
+- App not uploading after push -> Fixed CI/CD workflow misconfiguration
+- SSH access issue -> Solved via IAM roles and security group best practise 
+- Container resatrt problem -> Automated restart via Github Actions
+These issues helped strengthen my understanding of real production problems.
 
+## Key Learnings
+- Practical CI/CD using Github Actions
+- Docker image lifecycle and container management
+- Secure EC2 deployment using SSH keys
+- importance of automation in DevOps workflow
+- Debugging production-like cloud issues 
+
+## Future Improvements
+- Deploy using kubernetes (EKS)
+- Add Application Load Balancer 
+- Implement blue-green deployments
+- Add monitoring with CloudWatch
+
+## Author 
+Uzair Munir 
+Aspiring Cloud / DevOps Engineer
