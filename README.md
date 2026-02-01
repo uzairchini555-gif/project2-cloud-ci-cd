@@ -11,13 +11,13 @@ In a real-world cloud/DevOps workflow, manaully deploying apps after each code c
 - Python 3.11 (FastAPI) - Backend API
 - Docker - containerization
 - AWS EC2 - Cloud hosting
-- Girhub Actions - CI/CD Pipeline
+- Github Actions - CI/CD Pipeline
 - Linux (ubuntu) - Server OS
 
 ## Key Features
 - Automatic deployment after each git push
-- Dockerized app ensures consistent envioronment locally and on EC2
-- Eliminates manula SSH and container rebuilds 
+- Dockerized app ensures consistent environemnt locally and on EC2
+- Eliminates manual SSH and container rebuilds 
 - Handles container reatart automatically
 
 ## Challenges Faced 
@@ -39,28 +39,21 @@ Docker container runs FastAPI app
 Browser access -> http://<EC2_PUBLIC_IP>:8000
 
 ## How to run locally
- #clone the repo
+```bash
 git clone https://github.com/<your-username>/project2-cloud-ci-cd
-
-# Go into project folder
 cd project2-cloud-ci-cd
-
-# Build the Docker image
 docker build -t project2-app .
-
-# Run the container on port 8000
 docker run -d -p 8000:8000 --name project2 project2-app
-
-# Test it locally
 curl http://localhost:8000
 
-
 ## Result / Demo
-- After each push, Github Actions deploys the latest code automatically
-- The EC2 container updates without manual SSH
-- Browser shows the latest version immediately
-
+"Every push to main triggers a Github Actions workflow that:
+- Builds a Docker Image
+- Connects to EC2 via SSH 
+- pulls latest code
+- Rebuilds and Restarts the container"
 
 ## Demo Screenshot
+
 ![App running in browser](images/browser-output.png)
 
