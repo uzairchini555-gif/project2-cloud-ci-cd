@@ -59,3 +59,8 @@ curl http://localhost:8000
 - After each push, Github Actions deploys the latest code automatically
 - The EC2 container updates without manual SSH
 - Browser shows the latest version immediately
+
+
+## Demo Screenshot
+![App running in browser](images/browser-output.png)
+
