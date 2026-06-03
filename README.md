@@ -3,7 +3,7 @@
 ## Overview
 This project demonstrates a real-world CI/CD pipeline where a containerized python web application is automatically build and deployed to an AWS EC2 instance using Github Actions
 
-Any code change pushed to Github triggers an automated workflow that rebuilds the Docker iamge and redeploys the application - no manual SSH or restart required.
+Any code change pushed to Github triggers an automated workflow that rebuilds the Docker image and redeploys the application - no manual SSH or restart required.
 
 ## Problem Statement
 Manually deploying applications on server is:
@@ -26,7 +26,7 @@ Manually deploying applications on server is:
 
 ## How the CI/CD pipeline works
 1. Developer pushes code to the main branch
-2. Githu Actions workflow is triggered 
+2. Github Actions workflow is triggered 
 3. Workflow:
   - Checks out the latest code 
   - Build a docker image 
@@ -59,7 +59,7 @@ README.md
 ## How to Run Locally
 ```Bash
 git clone 
-https://github.com/<Your-user>/project2-cloud-cd-cd.git
+https://github.com/uzairchini555-gif/project2-cloud-cd-cd.git
 cd project-cloud-ci-cd
 
 docker build -t project2-app .
@@ -77,7 +77,7 @@ http://<EC2_PUBLIC_IP>:8000
 - Docker build errors -> Resolved by analyzing logs and fixing image structure
 - App not uploading after push -> Fixed CI/CD workflow misconfiguration
 - SSH access issue -> Solved via IAM roles and security group best practise 
-- Container resatrt problem -> Automated restart via Github Actions
+- Container restart problem -> Automated restart via Github Actions
 These issues helped strengthen my understanding of real production problems.
 
 ## Key Learnings
